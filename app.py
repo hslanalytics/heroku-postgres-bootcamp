@@ -38,7 +38,7 @@ def home():
 
 # @TODO: Route needed for each dataset
 # Example 1: Two column table
-@app.route("/api/tv")
+@app.route("/api/tv.json")
 def watched():
     results = db.session.query(tv_watched.name, tv_watched.hours).all()
 
