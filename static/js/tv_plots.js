@@ -1,6 +1,7 @@
 
 // Create the data array for the plot
-var tv_data = "/api/tv.json";
+var tv_data = d3.json("api/tv.json")
+//var tv_data = "/api/tv.json";
 
 console.log(tv_data);
 
