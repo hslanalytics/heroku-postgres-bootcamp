@@ -5,9 +5,9 @@ var tv_data = d3.json("api/tv.json")
 
 console.log(tv_data);
 
-var x = tv_data.name
+var x = tv_data[0].name
 
-var y = tv_data.hours
+var y = tv_data[0].hours
 
 var trace = {
     x: x,
