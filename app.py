@@ -26,13 +26,26 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-Pet = create_classes(db)
+tv_watched = create_classes(db)
 
 # create route that renders index.html template
 @app.route("/")
 def home():
     return render_template("index.html")
 
+# Load Database from Static File
+@app.route("/get", methods=["GET", "POST"])
+def send():
+    if request.method == "POST":
+        name = request.form["name"]
+        hours = request.form["hours"]
+
+        tv = tv_watched(name=name, hours=hours)
+        db.session.add(tv)
+        db.session.commit()
+        return redirect("/", code=302)
+
+    return render_template("form.html")
 
 # # Query the database and send the jsonified results
 # @app.route("/send", methods=["GET", "POST"])
