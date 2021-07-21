@@ -1,12 +1,11 @@
 def create_classes(db):
-    class Pet(db.Model):
-        __tablename__ = 'pets'
+    class Tv_watched(db.Model):
+        __tablename__ = 'tv_watched'
 
         id = db.Column(db.Integer, primary_key=True)
-        name = db.Column(db.String(64))
-        lat = db.Column(db.Float)
-        lon = db.Column(db.Float)
+        name = db.Column(db.String(50))
+        hours = db.Column(db.Float)
 
         def __repr__(self):
-            return '<Pet %r>' % (self.name)
-    return Pet
+            return '<TV Watched %r>' % (self.name)
+    return Tv_watched
