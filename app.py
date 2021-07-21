@@ -47,6 +47,34 @@ def send():
 
     return render_template("form.html")
 
+
+@app.route("/api/tv")
+def watched():
+    results = db.session.query(tv_watched.name, tv_watched.hours).all()
+
+    name_text = [result[0] for result in results]
+    tv_text = [result[1] for result in results]
+
+    tv_data = [{
+        "type": "scattergeo",
+        "locationmode": "USA-states",
+        "lat": 0.0,
+        "lon": 0.0,
+        "text": name_text,
+        "tv_text": tv_text,
+        "hoverinfo": "text",
+        "marker": {
+            "size": 50,
+            "line": {
+                "color": "rgb(8,8,8)",
+                "width": 1
+            },
+        }
+    }]
+
+    return jsonify(tv_data)
+
+
 # # Query the database and send the jsonified results
 # @app.route("/send", methods=["GET", "POST"])
 # def send():
