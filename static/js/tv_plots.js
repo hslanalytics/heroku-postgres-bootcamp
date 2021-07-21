@@ -1,6 +1,6 @@
 
 // Create the data array for the plot
-var data = "/api/tv";
+var data = "/api/tv.json";
 
 // Define the plot layout
 var layout = {
