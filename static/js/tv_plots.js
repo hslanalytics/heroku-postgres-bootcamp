@@ -1,28 +1,29 @@
 
 // Create the data array for the plot
-var tv_data = d3.json("api/tv.json")
-//var tv_data = "/api/tv.json";
+d3.json("api/tv.json").then((tv_data) => {
 
-console.log(tv_data);
+    console.log(tv_data);
 
-var x = tv_data[0].name
+    var x = tv_data[0].name
 
-var y = tv_data[0].hours
+    var y = tv_data[0].hours
 
-var trace = {
-    x: x,
-    y: y,
-    type: "bar"
-};
+    var trace = {
+        x: x,
+        y: y,
+        type: "bar"
+    };
 
-var data = [trace];
+    var data = [trace];
 
-// Define the plot layout
-var layout = {
-  title: "Hours of TV Watched by Students",
-  xaxis: { title: "Name" },
-  yaxis: { title: "Hours Watched"}
-};
+    // Define the plot layout
+    var layout = {
+    title: "Hours of TV Watched by Students",
+    xaxis: { title: "Name" },
+    yaxis: { title: "Hours Watched"}
+    };
 
-// Plot the chart to a div tag with id "bar-plot"
-Plotly.newPlot("bar-plot", data, layout);
+    // Plot the chart to a div tag with id "bar-plot"
+    Plotly.newPlot("bar-plot", data, layout);
+
+});
