@@ -46,9 +46,8 @@ def watched():
     hours = [result[1] for result in results]
 
     tv_data = [{
-        "type": "bar",
-        "x": name_text,
-        "y": hours
+        "name": name_text,
+        "hours": hours
     }]
 
     return jsonify(tv_data)
