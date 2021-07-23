@@ -1,5 +1,5 @@
 # import necessary libraries
-from models import create_classes
+from models import create_classes, create_tv_watched_geo
 import os
 from flask import (
     Flask,
@@ -30,6 +30,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 tv_watched = create_classes(db)
+tv_watched_geo = create_tv_watched_geo(db)
+
 
 # create route that renders index.html template
 @app.route("/")
@@ -54,3 +56,28 @@ def watched():
 
 if __name__ == "__main__":
     app.run()
+
+
+@app.route("/api/tv_geo.json")
+def watched_geo():
+    
+    # Query all columns in class
+    results = db.session.query(tv_watched_geo).all()
+
+    all_tv_watched_geo = []
+
+    # Loop through all records and add to dict
+    for result in results:
+
+        tv_watched_geo_dict = {}
+
+        tv_watched_geo_dict["name"] = result.name
+        tv_watched_geo_dict["hours"] = result.hours
+        tv_watched_geo_dict["lat"] = result.lat
+        tv_watched_geo_dict["lon"] = result.lon
+
+        all_tv_watched_geo.append(tv_watched_geo_dict)
+
+    json_tv_watched_geo = {"data": {"tv_watched": all_tv_watched_geo}}
+
+    return jsonify(json_tv_watched_geo)
