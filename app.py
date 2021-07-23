@@ -32,7 +32,6 @@ db = SQLAlchemy(app)
 tv_watched = create_classes(db)
 tv_watched_geo = create_tv_watched_geo(db)
 
-
 # create route that renders index.html template
 @app.route("/")
 def home():
@@ -68,7 +67,7 @@ def watched_geo():
 
     # Loop through all records and add to dict
     for result in results:
-
+        print(results)
         tv_watched_geo_dict = {}
 
         tv_watched_geo_dict["name"] = result.name
